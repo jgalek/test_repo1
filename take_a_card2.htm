@@ -1,0 +1,41 @@
+{% extends 'main.htm' %}
+
+{% block body %}
+    <div id = 'player'>
+        <h2>{{ name }} {{ "is playing" }}</h2>
+    </div>
+    <div id="table">
+    {{ "Table: \n" }}
+    {% for i in range(0, len_new_table_stash) %}
+        <div>
+            {% for x in range(0, len_run[i]) %}
+                {% if new_table_stash[i][x] %}
+                <img class="pile" src="{{ url_for('static', filename='img/cards/'+new_table_stash[i][x]|string+'.png')}}">
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+    <div>
+        {{ "The card at the top of the pile is: " }}
+    </div>
+    <div id="pile">
+        <img class="pile" src="{{ url_for('static', filename='img/cards/'+pile|string+'.png')}}">
+    </div>
+    <div>
+    {{ name }} {{ "your cards are: " }}
+    </div>
+    <div id="players_cards">
+    {% for i in range(0, len_hand) %}
+        <img class="pile" src="{{ url_for('static', filename='img/cards/'+hand[i]|string+'.png')}}">
+    {% endfor %}
+    </div>
+    <div id="take_a_card">
+        {{ "What would you like to do? "}}
+        <form class="take_a_card" action="{{ url_for('take_card') }}" method="post">
+            <button type="submit" class="submit submit-important" name="take_a_card" value="P">{{" Pick from pile "}}</button>
+            <button type="submit" class="submit submit-important" name="take_a_card" value="T">{{" Take from deck "}}</button>
+
+        </form>
+    </div>
+{% endblock %}

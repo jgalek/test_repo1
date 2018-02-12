@@ -1,0 +1,42 @@
+{% extends 'main.htm' %}
+
+{% block body %}
+    <div class = 'box'>
+        <form class="action" action="{{ url_for('action') }}" method="post">
+            <div id = 'player'>
+                <h2>{{ name }} {{ "is playing" }}</h2>
+            </div>
+            <div id="table">
+                {{ "Table: \n" }}
+                {% for i in range(0, len_new_table_stash) %}
+                    <div>
+                        <form class="action" action="{{ url_for('action') }}" method="post">
+                            {% for x in range(0, len_run[i]) %}
+                                {% if new_table_stash[i][x] %}
+                                    <input type="checkbox" class="p" name="table-card-{{ i }}-{{ x }}"|string id="table-card-{{ i }}-{{ x }}"|string value="{{ new_table_stash[i][x] }}">
+                                    <label for="table-card-{{ i }}-{{ x }}"|string><img class="pile" src="{{ url_for('static', filename='img/cards/'+new_table_stash[i][x]|string+'.png')}}">
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                {{ name }} {{ "your cards are: " }}
+            </div>
+            <div id="players_cards">
+                {% for i in range(0, len_hand) %}
+                    <input type="checkbox" class="p" name="card-{{ i }}"|string id="card-{{ i }}"|string value="{{ hand[i] }}">
+                    <label for="card-{{ i }}"|string><img class="pile" src="{{ url_for('static', filename='img/cards/'+hand[i]|string+'.png')}}"></label>
+
+                {% endfor %}
+            </div>
+            <div id="action">
+                {{ "What would you like to do? \n(M)ove Cards, (D)rop, (S)ort, (C)lose Game, (R)ules: "}}
+                <button type="text" class="submit submit-important" name="action" value="M">{{" Move Cards "}}</button>
+                <button type="submit" class="submit submit-important" name="action" value="D">{{" Drop "}}</button>
+                <button type="text" class="submit submit-important" name="action" value="S">{{" Sort "}}</button>
+                <button type="submit" class="submit submit-important" name="action" value="C">{{" Put on the table "}}</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

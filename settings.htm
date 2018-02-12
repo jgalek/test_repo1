@@ -1,0 +1,13 @@
+{% extends "main.htm" %}
+{% block body %}
+    <h2>Podaj imiona graczy</h2>
+        <form class="player-details" action="{{ url_for('main') }}" method="post">
+        {% set number = range(1, number_of_people|int+1) %}
+        {% for x in number %}
+            <label for="player-name-{{ x }}">Gracz nr {{ x }}:</label>
+            <input type="text" name="player-name-{{ x }}" id="player-name-{{ x }}">
+        {% endfor %}
+            <button type="submit" class="submit">Dalej</button>
+    </form>
+    </div>
+{% endblock %}

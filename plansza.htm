@@ -1,0 +1,11 @@
+{% extends "main.htm" %}
+{% block body %}
+<h1>GRA</h1>
+<p>zmiany: {{zmiany }}</p>
+<form action="/ruch">
+	{% for k,v in p.items() %}
+		<input type="text" class="p" name="{{ k }}" value="{{ p[k] }}">
+	{% endfor %}
+	<input type="submit" value="ruch">
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "main.htm" %}
+{% block body %}
+    <div>
+        <h2>Podaj ilość graczy</h2>
+        <form class="player-details" action="{{ url_for('settings') }}" method="post">
+            <label for="number_of_humans">Number of people:</label>
+            <input type="number" name="number_of_people" id="number_of_poeple">
+            <button type="submit" class="submit">Dalej</button>
+        </form>
+    </div>
+{% endblock %}
